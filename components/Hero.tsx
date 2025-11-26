@@ -1,0 +1,63 @@
+"use client";
+import { motion } from "framer-motion";
+import { PlayCircle, ArrowRight } from "lucide-react";
+
+export default function Hero() {
+  return (
+    <section className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-mblue-dark">
+      {/* BACKGROUND VIDEO */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-mblue-dark/60 z-10" /> {/* Filtre bleu nuit */}
+        <div className="absolute inset-0 bg-gradient-to-t from-mblue-dark via-transparent to-mblue-dark/80 z-10" />
+        
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-60 mix-blend-luminosity"
+        >
+          {/* Vidéo de foule */}
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-concert-crowd-with-lights-2083-large.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      {/* CONTENT */}
+      <div className="relative z-20 container mx-auto px-6 text-center mt-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <span className="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-white text-xs font-bold tracking-widest mb-6 uppercase">
+            L'Agence Leader en Côte d'Ivoire
+          </span>
+          
+          <h1 className="text-5xl md:text-7xl lg:text-9xl font-black text-white tracking-tighter mb-6 leading-tight">
+            VIVRE L'INSTANT <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-mred to-purple-500">
+              SANS LIMITES
+            </span>
+          </h1>
+
+          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light">
+            De la conception à la diffusion <span className="text-mred font-bold">VivaStream™</span>. 
+            MGroup propulse vos événements dans une nouvelle dimension.
+          </p>
+
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+            <button className="group bg-mred text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-mred transition-all flex items-center gap-2 w-full md:w-auto justify-center shadow-lg shadow-mred/30">
+              Voir l'agenda
+              <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+            </button>
+            
+            <button className="group px-8 py-4 rounded-full font-bold text-lg text-white border border-white/30 hover:bg-white/10 backdrop-blur-sm transition-all flex items-center gap-2 w-full md:w-auto justify-center">
+              <PlayCircle className="text-mred" />
+              Démo Live
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
