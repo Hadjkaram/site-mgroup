@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Ticket } from "lucide-react";
+import { Calendar, MapPin, Ticket, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import PaymentModal from "./PaymentModal"; // Import du modal
+import { useState } from "react";
+import PaymentModal from "./PaymentModal";
+import Link from "next/link";
 
 const events = [
   {
@@ -12,7 +13,8 @@ const events = [
     category: "Cérémonie",
     date: "10 Nov 2025",
     location: "Sofitel Ivoire, Abidjan",
-    image: "https://images.unsplash.com/photo-1514525253440-b393452e3726?q=80&w=800&auto=format&fit=crop",
+    // IMAGE CORRIGÉE (Unsplash fiable)
+    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop",
     price: "10.000 FCFA",
   },
   {
@@ -36,7 +38,6 @@ const events = [
 ];
 
 export default function EventsGrid() {
-  // État pour gérer l'ouverture du modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState({ name: "", price: "" });
 
@@ -46,18 +47,20 @@ export default function EventsGrid() {
   };
 
   return (
-    <section className="py-20 bg-black text-white">
+    <section className="py-20 bg-mblue-dark text-white">
       <div className="container mx-auto px-6">
-        <div className="flex justify-between items-end mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
           <div>
             <h2 className="text-3xl md:text-5xl font-bold mb-2">
               Prochains <span className="text-mred">Événements</span>
             </h2>
             <p className="text-gray-400">Réservez vos places ou accédez au VivaStream™.</p>
           </div>
-          <button className="hidden md:block text-sm font-bold border-b border-mred pb-1 hover:text-mred transition-colors">
-            VOIR TOUT L'AGENDA
-          </button>
+          
+          {/* LIEN CORRIGÉ VERS LA NOUVELLE PAGE AGENDA */}
+          <Link href="/agenda" className="flex items-center gap-2 text-sm font-bold text-white hover:text-mred transition-colors border-b border-white/20 pb-1 hover:border-mred">
+            VOIR TOUT L'AGENDA <ArrowRight size={16}/>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -68,7 +71,7 @@ export default function EventsGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group relative h-[450px] rounded-2xl overflow-hidden cursor-pointer border border-white/10 hover:border-mred/50 transition-colors"
+              className="group relative h-[450px] rounded-2xl overflow-hidden cursor-pointer border border-white/5 hover:border-mred/50 transition-colors bg-white/5"
             >
               <div className="absolute inset-0">
                 <Image
@@ -77,7 +80,7 @@ export default function EventsGrid() {
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-mblue-dark via-mblue-dark/50 to-transparent opacity-90 group-hover:opacity-70 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-mblue-dark via-mblue-dark/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity" />
               </div>
 
               <div className="absolute top-4 left-4 bg-mred text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg shadow-mred/20">
@@ -96,7 +99,6 @@ export default function EventsGrid() {
                 </div>
 
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-3">
-                  {/* C'est ici qu'on branche le bouton au Modal */}
                   <button 
                     onClick={() => handleOpenModal(event.title, event.price)}
                     className="flex-1 bg-white text-black font-bold py-3 rounded-xl hover:bg-mred hover:text-white transition-colors flex items-center justify-center gap-2"
@@ -111,7 +113,6 @@ export default function EventsGrid() {
         </div>
       </div>
 
-      {/* Le Modal est placé ici, invisible par défaut */}
       <PaymentModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)}

@@ -9,17 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Les couleurs officielles de MGroup
+        // CHARTE MGROUP MISE À JOUR
         mblue: {
-          DEFAULT: "#1e2380", // Le bleu roi du logo
-          dark: "#0a0c35",    // Un bleu nuit très sombre pour les fonds
+          DEFAULT: "#1e2380", // Bleu roi du logo
+          dark: "#050520",    // LE NOUVEAU FOND (Bleu Nuit très sombre)
+          light: "#2a3090",
         },
         mred: {
-          DEFAULT: "#e6007e", // Le magenta/rose vif du logo
+          DEFAULT: "#e6007e", // Magenta MGroup
+          glow: "#ff3399",
         },
-        morange: {
-          DEFAULT: "#ff6b00", // La touche orange
-        }
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
     },
   },
